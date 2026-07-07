@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-
+import { generateCampaign as aiGenerateCampaign } from "@/lib/ai/campaign-generator";
 export default function NewCampaignPage() {
   const [topic, setTopic] = useState("");
   const [audience, setAudience] = useState("");
@@ -9,10 +9,16 @@ export default function NewCampaignPage() {
   const [goal, setGoal] = useState("");
   const [result, setResult] = useState("");
 
-  function generateCampaign() {
-    setResult(`
-🔥 Campaign Strategy
+  async function generateCampaign() {
+   const campaign = await aiGenerateCampaign({
+  topic,
+  audience,
+  platform,
+});    
 
+   setResult(`
+🔥 Campaign Strategy
+  {
 Topic:
 ${topic}
 
@@ -28,7 +34,7 @@ ${goal}
 --------------------------------
 
 🎯 Viral Hook
-"Stop scrolling! Here's what every ${audience} should know about ${topic}."
+${campaign.hook}
 
 📹 Video Ideas
 1. Common mistakes people make.
@@ -38,10 +44,10 @@ ${goal}
 5. Frequently asked questions.
 
 📝 Caption
-"If you're interested in ${topic}, this is for you! Save this post and share it with a friend."
+${campaign.caption}
 
-🏷 Hashtags
-#AI #Marketing #ContentCreator #Viral #${platform}
+🏷️ Hashtags
+${campaign.hashtags.join(" ")}
 
 📢 Call To Action
 "Follow for more content and check the link in my bio!"
