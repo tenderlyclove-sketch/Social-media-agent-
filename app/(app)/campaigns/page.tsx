@@ -6,6 +6,13 @@ import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { PLATFORM_MAP, type PlatformId } from "@/lib/platforms"
+import { Hero } from "@/components/dashboard/hero"
+import { StatsCards } from "@/components/dashboard/stats-cards"
+import { QuickActions } from "@/components/dashboard/quick-actions"
+import { AIInsights } from "@/components/dashboard/ai-insights"
+import { RevenueChart } from "@/components/dashboard/revenue-chart"
+import { BusinessHealth } from "@/components/dashboard/business-health"
+import { RecentCampaigns } from "@/components/dashboard/recent-campaigns"
 import { Plus, Megaphone, ArrowUpRight } from "lucide-react"
 
 export default async function CampaignsPage() {
@@ -13,16 +20,35 @@ export default async function CampaignsPage() {
 
   return (
     <>
-      <PageHeader
+<div className="space-y-6 mb-8">
+  <Hero />
+
+  <StatsCards />
+
+  <QuickActions />
+
+  <div className="grid gap-6 xl:grid-cols-3">
+    <div className="xl:col-span-2">
+      <RevenueChart />
+    </div>
+
+    <AIInsights />
+  </div>
+
+  <BusinessHealth />
+
+  <RecentCampaigns />
+</div>      
+<PageHeader
         title="Campaigns"
         description="Every campaign the agent has planned, with its objective, platforms, and budget."
       >
-        <Button asChild>
-          <Link href="/campaigns/new">
-            <Plus className="h-4 w-4" />
-            New campaign
-          </Link>
-        </Button>
+        <Link href="/campaigns/new">
+  <Button>
+    <Plus className="h-4 w-4" />
+    New campaign
+  </Button>
+</Link>
       </PageHeader>
 
       {campaigns.length === 0 ? (
@@ -38,12 +64,12 @@ export default async function CampaignsPage() {
               Plan your first AI-powered campaign to get started.
             </p>
           </div>
-          <Button asChild>
-            <Link href="/campaigns/new">
-              <Plus className="h-4 w-4" />
-              New campaign
-            </Link>
-          </Button>
+          <Link href="/campaigns/new">
+  <Button>
+    <Plus className="h-4 w-4" />
+    New campaign
+  </Button>
+</Link>
         </Card>
       ) : (
         <div className="grid gap-4 sm:grid-cols-2">
