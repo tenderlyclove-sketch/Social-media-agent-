@@ -11,10 +11,12 @@ import {
 } from "./types";
 import { safeJsonParse } from "./utils";
 
-const client = new OpenAI({
-  baseURL: "https://openrouter.ai/api/v1",
-  apiKey: process.env.OPENROUTER_API_KEY!,
-});
+function getClient() {
+  return new OpenAI({
+    baseURL: "https://openrouter.ai/api/v1",
+    apiKey: process.env.OPENROUTER_API_KEY!,
+  });
+}
 
 
 // ==========================================
@@ -111,7 +113,7 @@ brain, story, creative, sales, platform
 `;
 
   const completion =
-    await client.chat.completions.create({
+    await getClient().chat.completions.create({
 
       model: BrainConfig.MODEL,
 
