@@ -32,7 +32,7 @@ export function CampaignActions({ id }: { id: number }) {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger>
         <Button
           variant="ghost"
           size="icon"

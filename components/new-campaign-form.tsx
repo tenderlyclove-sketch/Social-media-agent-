@@ -116,7 +116,12 @@ export function NewCampaignForm() {
 
         <div className="flex flex-col gap-2">
           <Label htmlFor="objective">Objective</Label>
-          <Select value={objective} onValueChange={setObjective}>
+          <Select
+            value={objective}
+            onValueChange={(value) => {
+              if (value !== null) setObjective(value)
+            }}
+          >
             <SelectTrigger id="objective">
               <SelectValue />
             </SelectTrigger>
